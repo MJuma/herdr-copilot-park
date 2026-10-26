@@ -1,0 +1,20 @@
+id = "herdr-copilot-park"
+name = "Copilot Park"
+version = "0.1.0"
+min_herdr_version = "0.9.5"
+description = "Park idle GitHub Copilot CLI tabs to free their memory. Press Enter in a parked tab to load the session again."
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "park"
+title = "Park this Copilot tab"
+description = "Stop the idle Copilot CLI session in the focused pane and keep a placeholder that loads it again."
+contexts = ["pane"]
+command = ["python3", "bin/park.py", "focused"]
+
+[[actions]]
+id = "park-all"
+title = "Park all idle Copilot tabs"
+description = "Park every idle Copilot CLI session on this Herdr server."
+contexts = ["global"]
+command = ["python3", "bin/park.py", "all"]
