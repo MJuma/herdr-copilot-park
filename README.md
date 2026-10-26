@@ -78,6 +78,30 @@ herdr plugin action invoke herdr-copilot-park.park-all
 
 The sidebar shows a parked tab as the agent `parked`.
 
+## Show parked tabs in color
+
+A parked tab reports the state `idle`, so it has the same status icon as an
+idle Copilot session. Herdr cannot change that icon for one agent. But you can
+change the color of the agent name. For example, this layout shows the tab
+name first, hides the name `copilot`, and shows `parked` in yellow:
+
+```toml
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", { token = "tab", bold = true },
+   { token = "agent", dim = true, rules = [
+     { equals = "copilot", hide = true },
+     { equals = "parked", fg = "#e5c07b", dim = false },
+   ] }],
+  [{ token = "machine", dim = true, rules = [{ equals = "Local", hide = true }] },
+   { token = "workspace", dim = true }],
+]
+```
+
+Put it in `~/.config/herdr/config.toml` and run `herdr server reload-config`.
+See [Sidebar row layouts](https://herdr.dev/docs/configuration/#sidebar-row-layouts)
+for the other tokens and rules.
+
 ## What parking does
 
 1. It checks that the pane runs Copilot CLI and that Copilot is `idle` or
